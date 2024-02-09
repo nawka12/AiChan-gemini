@@ -11,6 +11,7 @@ Dependencies:
 - dotenv
 
 ## Setup
+- Clone repo
 - `npm install`
 -  Set `API_KEY` and `DISCORD_TOKEN` on the `.env` file
 
