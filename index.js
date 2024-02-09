@@ -13,10 +13,10 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 client.on('messageCreate', async function(message){
     try {
-        if(message.author.bot || !message.content.toLowerCase().startsWith("ao!") || message.content.toLowerCase() == ("ao!") ) return;
+        if(message.author.bot || !message.content.toLowerCase().startsWith("ai!") || message.content.toLowerCase() == ("ai!") ) return;
         
         const input = message.content.slice(3);
-        if(message.content.toLowerCase().startsWith("ao!")){
+        if(message.content.toLowerCase().startsWith("ai!")){
             async function run(){
                 const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
@@ -30,14 +30,6 @@ client.on('messageCreate', async function(message){
                             role: "model",
                             parts: "Hello! I am Ai-chan, a helpful assistant in the form of a Discord bot. My name is taken from Kizuna Ai, a virtual YouTuber. Nice to meet you!.",
                         },
-                        // {
-                        //     role: "user",
-                        //     parts: "Can you answer all my question as short as possible? I don't really like reading.",
-                        // },
-                        // {
-                        //     role: "model",
-                        //     parts: "Sure.",
-                        // },
                     ],
                     generationConfig: {
                         maxOutputTokens: 256,
@@ -52,9 +44,9 @@ client.on('messageCreate', async function(message){
                     // Handle the case where the response was blocked
                     message.reply("Your question has been blocked by the system due to safety concerns.");
                 } else {
-                    const replyDari = response.text();
+                    const replyFrom = response.text();
                     message.reply(
-                        `${replyDari}\n\n\`\`\`Powered by Gemini Pro free tier\`\`\``
+                        `${replyFrom}\n\n\`\`\`Powered by Gemini Pro free tier\`\`\``
                     );
                 }
             }
