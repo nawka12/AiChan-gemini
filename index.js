@@ -13,10 +13,10 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 client.on('messageCreate', async function(message) {
     try {
-        if (message.author.bot || !message.content.toLowerCase().startsWith("ap!") || message.content.toLowerCase() == ("ao!")) return;
+        if (message.author.bot || !message.content.toLowerCase().startsWith("ai!") || message.content.toLowerCase() == ("ai!")) return;
 
         const input = message.content.slice(3);
-        if (message.content.toLowerCase().startsWith("ap!")) {
+        if (message.content.toLowerCase().startsWith("ai!")) {
             async function run() {
                 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
