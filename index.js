@@ -13,10 +13,10 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 client.on('messageCreate', async function(message) {
     try {
-        if (message.author.bot || !message.content.toLowerCase().startsWith("ai!") || message.content.toLowerCase() == ("ai!")) return;
+        if (message.author.bot || !message.content.toLowerCase().startsWith("ap!") || message.content.toLowerCase() == ("ao!")) return;
 
         const input = message.content.slice(3);
-        if (message.content.toLowerCase().startsWith("ai!")) {
+        if (message.content.toLowerCase().startsWith("ap!")) {
             async function run() {
                 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
@@ -55,8 +55,11 @@ client.on('messageCreate', async function(message) {
                     chunks.push(currentChunk.trim());
                 }
 
-                // Send the first chunk using message.reply and subsequent chunks using message.channel.send
-                if (chunks.length > 0) {
+                // Send the message directly if there's only one chunk
+                if (chunks.length === 1) {
+                    await message.reply(`${chunks[0]}\n\n\`\`\`Powered by Gemini Pro free tier\`\`\``);
+                } else if (chunks.length > 1) {
+                    // Send the first chunk using message.reply and subsequent chunks using message.channel.send
                     await message.reply(chunks[0]);
                     for (let i = 1; i < chunks.length - 1; i++) {
                         message.channel.sendTyping();
